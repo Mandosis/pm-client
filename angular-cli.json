@@ -16,7 +16,8 @@
       "mobile": false,
       "styles": [
         "../node_modules/normalize.css/normalize.css",
-        "styles.sass"
+        "../node_modules/font-awesome/css/font-awesome.min.css",
+        "styles.scss"
       ],
       "scripts": [],
       "environments": {
@@ -39,7 +40,7 @@
     }
   },
   "defaults": {
-    "styleExt": "sass",
+    "styleExt": "scss",
     "prefixInterfaces": false
   }
 }

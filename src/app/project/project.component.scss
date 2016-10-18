@@ -1,0 +1,58 @@
+@import "../shared/colors";
+
+$sidebar-width: 6rem;
+$nav-item-height: 6rem;
+$nav-icon-size: 2rem;
+
+.sidebar {
+  width: $sidebar-width;
+  height: 100vh;
+  background: $color-brand-primary;
+  position: absolute;
+  left: 0;
+
+  .project-icon {
+    height: $sidebar-width - 2;
+    width: $sidebar-width - 2;
+    margin: 1rem;
+    background: $color-project-icon-default;
+    cursor: pointer;
+  }
+
+  nav {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+
+    ul {
+      padding: 0;
+      width: $sidebar-width;
+
+      li {
+        list-style: none;
+        width: $sidebar-width;
+        height: $nav-item-height;
+        color: #FFF;
+        font-size: $nav-icon-size;
+        text-align: center;
+        line-height: $nav-icon-size;
+        cursor: pointer;
+
+        // Font Awesome
+        .fa {
+          margin-top: $nav-icon-size;
+        }
+      }
+    }
+  }
+}
+
+main {
+  width: calc(100% - #{$sidebar-width});
+  height: 100%;
+  position: absolute;
+  right: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
