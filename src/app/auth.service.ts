@@ -16,7 +16,6 @@ export class AuthService {
 
   private jwtHelper: JwtHelper = new JwtHelper();
   private _socketUrl: string;
-  private _socket: SocketIOClient.Socket;
 
   constructor(private http: Http, private router: Router) { }
 
@@ -28,13 +27,13 @@ export class AuthService {
     headers.append('Content-Type', 'application/json');
 
     return this.http
-      .post('/v1/login', JSON.stringify({email, password}), { headers })
+      .post('/v1/auth/login', JSON.stringify({email, password}), { headers })
       .map(res => res.json())
       .map((res) => {
-        let user = res.data;
+        let token = res.data;
 
-        if (user && user.token) {
-          this.accessToken = user.token;
+        if (token) {
+          this.accessToken = token;
         }
 
         return res.success;
@@ -66,19 +65,15 @@ export class AuthService {
 
     return new Observable(observer => {
       if (this.accessToken && !isExpired) {
-        this._connectSocket();
-        this._socket.on('connect', () => {
-          this.showNavBar = true;
-          observer.next(true);
-          observer.complete();
-        })
-
-        this._socket.on('unauthorized', (error, callback) => {
-          console.log('socket unauthorized');
-          this.showNavBar = false;
-          observer.next(false);
-          observer.complete();
-        })
+        this.socket.on('connect', () => {
+          this.socket
+            .emit('authenticate', { token: this.accessToken })
+            .on('authenticated', () => {
+              this.showNavBar = true;
+              observer.next(true);
+              observer.complete();
+            })
+        });
       } else {
         this.showNavBar = false;
         observer.next(false);
@@ -91,18 +86,40 @@ export class AuthService {
   /**
    * Connect to webSocket server
    */
-  private _connectSocket() {
-    this._socket = io.connect('', {
-      query: 'token=' + this.accessToken
-    })
+  get socket(): SocketIOClient.Socket {
+    return io.connect('');
   }
 
+  /**
+   * Handle JWT
+   */
   get accessToken() {
     return localStorage.getItem('accessToken');
   }
 
   set accessToken(jwt: string) {
     localStorage.setItem('accessToken', jwt);
+  }
+
+
+  /**
+   * Verify and refresh access token
+   */
+  refreshToken() {
+    this.http.post('/v1/auth/refresh', { token: this.accessToken})
+      .map(res => res.json())
+      .map((res) => {
+        if (res.success) {
+          this.accessToken = res.data;
+        }
+        return res.success;
+      })
+      .subscribe((success) => {
+        if (!success) {
+          this.router.navigate(['/signin']);
+        }
+        console.log('refreshToken called.');
+      });
   }
 
 }

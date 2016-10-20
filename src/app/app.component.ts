@@ -14,9 +14,19 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
+    // Check if app shell should be visible
     this.authService.isAuthenticated()
       .subscribe((result: boolean) => {
         this.isAuthenticated = result;
       })
+
+    // Refresh access token
+    this.authService.refreshToken();
+
+    // Refresh every 30 minutes
+    let halfHour: number = 1000 * 60  * 30; 
+    setInterval(() => {
+      this.authService.refreshToken();
+    }, halfHour);
   }
 }

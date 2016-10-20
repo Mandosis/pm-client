@@ -20,7 +20,6 @@ export class AuthGuard implements CanActivate {
     return this.authService.isAuthenticated()
       .map(result => {
         let canActivate = result;
-        console.log(`canActivate: ${canActivate}`);
         
         if (!canActivate) {
           this.router.navigate(['/signin']);

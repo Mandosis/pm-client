@@ -1,7 +1,7 @@
 <section>
   <div class="container">
-    <input type="email" id="email" name="email" [(ngModel)]="email" (key.enter)="login()" placeholder="Email">
-    <input type="password" id="password" name="password" [(ngModel)]="password" (key.enter)="login()" placeholder="Password">
+    <input type="email" id="email" name="email" [(ngModel)]="email" (keydown.enter)="login()" placeholder="Email">
+    <input type="password" id="password" name="password" [(ngModel)]="password" (keydown.enter)="login()" placeholder="Password">
     <button type="submit" (click)="login()">Sign in</button>
   </div>
 </section>
