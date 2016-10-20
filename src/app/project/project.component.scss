@@ -21,10 +21,18 @@ $nav-icon-size: 2rem;
 
   nav {
     position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
+    margin-top: 1rem;
 
+    .active-line {
+      height: $nav-item-height;
+      width: 0.2rem;
+      margin-top: 1rem;
+      background: #9c3333;
+      // background: #339c53;
+      position: absolute;
+      transition: transform 0.5s;
+    }
+    
     ul {
       padding: 0;
       width: $sidebar-width;

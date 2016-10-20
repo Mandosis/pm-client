@@ -4,17 +4,18 @@
   </div>
 
   <nav>
+    <span class="active-line" [style.transform]="activeLinePosition" [style.background]="activeLineColor"></span>
     <ul>
-      <li routerLink="./docs">
+      <li routerLink="./docs" (click)="moveActiveLine(0)">
         <i class="fa fa-book" aria-hidden="true"></i>
       </li>
-      <li routerLink="./boards">
+      <li routerLink="./boards" (click)="moveActiveLine(1)">
         <i class="fa fa-trello" aria-hidden="true"></i>
       </li>
-      <li routerLink="./issues">
+      <li routerLink="./issues" (click)="moveActiveLine(2)">
         <i class="fa fa-bug" aria-hidden="true"></i>
       </li>
-      <li routerLink="./settings">
+      <li routerLink="./settings" (click)="moveActiveLine(3)">
         <i class="fa fa-gear" aria-hidden="true"></i>
       </li>
     </ul>
