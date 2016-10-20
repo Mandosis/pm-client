@@ -1,0 +1,23 @@
+@import "./shared/colors";
+
+$navbar-height: 4rem;
+
+header {
+  background: $color-navbar;
+  height: $navbar-height;
+  width: 100%;
+  color: #EEE;
+  // box-shadow: 0px 1px 5px 0px rgba(50, 50, 50, 0.75);
+}
+
+main {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.navbar-visible {
+  height: calc(100% - #{$navbar-height});
+}

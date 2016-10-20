@@ -11,6 +11,7 @@ import * as io from 'socket.io-client';
 @Injectable()
 export class AuthService {
 
+  showNavBar: boolean;
   redirectUrl: string;
 
   private jwtHelper: JwtHelper = new JwtHelper();
@@ -45,6 +46,7 @@ export class AuthService {
    */
   logout() {
     localStorage.removeItem('accessToken');
+    this.showNavBar = false;
     this.router.navigate(['signin']);
   }
 
@@ -66,16 +68,19 @@ export class AuthService {
       if (this.accessToken && !isExpired) {
         this._connectSocket();
         this._socket.on('connect', () => {
+          this.showNavBar = true;
           observer.next(true);
           observer.complete();
         })
 
         this._socket.on('unauthorized', (error, callback) => {
           console.log('socket unauthorized');
+          this.showNavBar = false;
           observer.next(false);
           observer.complete();
         })
       } else {
+        this.showNavBar = false;
         observer.next(false);
         observer.complete();
       }
