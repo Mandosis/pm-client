@@ -5,45 +5,28 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProjectComponent }         from './project/project.component';
 import { LoginComponent }           from './login/login.component';
 import { HomeComponent }            from './home/home.component';
-import { WikiComponent }            from './wiki/wiki.component';
-import { IssueTrackerComponent }    from './issue-tracker/issue-tracker.component';
-import { ProjectSettingsComponent } from './project-settings/project-settings.component';
-import { BoardsComponent }          from './boards/boards.component';
+import { ProjectRoutingModule }     from './project/project-routing.module';
+
+// Guards
+import { AuthGuard } from './auth-guard.service';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard]
   },
   {
-    path: 'project/:name',
-    component: ProjectComponent,
-    children: [
-      {
-        path: '',
-        component: HomeComponent
-      },
-      {
-        path: 'docs',
-        component: WikiComponent
-      },
-      {
-        path: 'boards',
-        component: BoardsComponent
-      },
-      {
-        path: 'issues',
-        component: IssueTrackerComponent
-      },
-      {
-        path: 'settings',
-        component: ProjectSettingsComponent
-      }
-    ]
+    path: 'project',
+    loadChildren: 'project/project.module#ProjectModule'
   },
   {
-    path: 'login',
+    path: 'signin',
     component: LoginComponent
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
 

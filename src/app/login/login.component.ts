@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../authentication.service';
+import { Component, OnInit, Renderer } from '@angular/core';
+import { Location }                    from '@angular/common';
+import { Router }                      from '@angular/router';
+
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +14,12 @@ export class LoginComponent implements OnInit {
   password: string;
   error: string;
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(
+    private authService: AuthService,
+    private location: Location,
+    private router: Router,
+    private renderer: Renderer
+  ) { }
 
   ngOnInit() {
   }
@@ -20,17 +28,24 @@ export class LoginComponent implements OnInit {
     if (this.email && this.password) {
       this.authService.login(this.email, this.password)
         .subscribe((result) => {
-          console.log(result, localStorage.getItem('accessToken'));
+          // Check web socket authentication
           this.authService.isAuthenticated()
             .subscribe((result) => {
-              console.log('Authenticated: ' + result);
+
+              // Redirect upon login
+              let redirectUrl = this.authService.redirectUrl;
+
+              if (redirectUrl) {
+                this.location.back();
+              } else {
+                this.router.navigate(['']);
+              }
             })
         })
     } else {
       // TODO: add better checking
       console.log('user name or password missing');
     }
-    console.log('login button hit');
   }
 
 }
