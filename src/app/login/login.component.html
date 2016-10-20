@@ -1,7 +1,7 @@
-<p>
-  login works!
-</p>
-
-<input type="email" [(ngModel)]="email">
-<input type="password" [(ngModel)]="password">
-<button type="submit" (click)="login()" (key.enter)="login()">Sign in</button>
+<section>
+  <div class="container">
+    <input type="email" id="email" name="email" [(ngModel)]="email" (key.enter)="login()" placeholder="Email">
+    <input type="password" id="password" name="password" [(ngModel)]="password" (key.enter)="login()" placeholder="Password">
+    <button type="submit" (click)="login()">Sign in</button>
+  </div>
+</section>
