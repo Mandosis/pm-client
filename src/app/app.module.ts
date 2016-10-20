@@ -13,6 +13,8 @@ import { ProjectSettingsComponent } from './project-settings/project-settings.co
 import { WikiComponent } from './wiki/wiki.component';
 import { BoardsComponent } from './boards/boards.component';
 
+import { AuthenticationService } from './authentication.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,7 @@ import { BoardsComponent } from './boards/boards.component';
     IssueTrackerComponent,
     ProjectSettingsComponent,
     WikiComponent,
-    BoardsComponent
+    BoardsComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,9 @@ import { BoardsComponent } from './boards/boards.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    AuthenticationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

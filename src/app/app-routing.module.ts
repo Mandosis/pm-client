@@ -12,6 +12,10 @@ import { BoardsComponent }          from './boards/boards.component';
 
 const routes: Routes = [
   {
+    path: '',
+    component: HomeComponent
+  },
+  {
     path: 'project/:name',
     component: ProjectComponent,
     children: [

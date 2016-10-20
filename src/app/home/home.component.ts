@@ -10,6 +10,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    io.connect('http://localhost:3000');
   }
 
 }
