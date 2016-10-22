@@ -6,10 +6,12 @@ $nav-icon-size: 2rem;
 
 .sidebar {
   width: $sidebar-width;
-  height: 100%;
+  height: calc(100% - 4rem);
   background: $color-brand-primary;
   position: fixed;
   left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   .project-icon {
     height: $sidebar-width - 2;
@@ -58,7 +60,7 @@ $nav-icon-size: 2rem;
 
 .viewport {
   width: calc(100% - #{$sidebar-width});
-  height: 100%;
+  height: calc(100% - 4rem);
   position: fixed;
   right: 0;
   overflow-x: hidden;
