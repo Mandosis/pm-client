@@ -1,0 +1,54 @@
+@import "../../shared/colors";
+
+section {
+  min-height: calc(100% - 4rem);
+  width: 100%;
+  position: fixed;
+  background: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div {
+  width: 35rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  width: 100%;
+  height: auto;
+  margin: auto;
+}
+
+input, textarea {
+  display: block;
+  width: calc(100% - 2.1rem);
+  border-radius: 0.2rem;
+  border: 1px solid #DDD;
+  padding: 0.7rem 1rem;
+  outline: none;
+  background: #FAFAFA;
+  color: #444;
+  transition: background 0.02s;
+  margin-bottom: 1rem;
+}
+
+button, input[type="submit"] {
+  background: $color-brand-primary;
+  width: 100%;
+  height: 2.5rem;
+  font-family: 'Noto Sans', sans-serif;
+  outline: none;
+  border: $color-navbar-divider;
+  border-radius: 0.3rem;
+  color: #FFF;
+  font-size: 0.8rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+  cursor: pointer;
+}

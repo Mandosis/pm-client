@@ -116,6 +116,7 @@ export class AuthService {
       })
       .subscribe((success) => {
         if (!success) {
+          this.logout();
           this.router.navigate(['/signin']);
         }
         console.log('refreshToken called.');

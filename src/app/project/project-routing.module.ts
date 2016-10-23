@@ -8,6 +8,7 @@ import { WikiComponent }            from './wiki/wiki.component';
 import { IssueTrackerComponent }    from './issue-tracker/issue-tracker.component';
 import { ProjectSettingsComponent } from './project-settings/project-settings.component';
 import { BoardsComponent }          from './boards/boards.component';
+import { CreateProjectComponent }   from './create-project/create-project.component';
 
 // Guards
 import { AuthGuard } from '../auth-guard.service';
@@ -39,6 +40,11 @@ const routes: Routes = [
         component: ProjectSettingsComponent
       }
     ]
+  },
+  {
+    path: 'create/project',
+    component: CreateProjectComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

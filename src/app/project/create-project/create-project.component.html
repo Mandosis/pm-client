@@ -1,0 +1,15 @@
+<section>
+  <div>
+    <a routerLink="/">Back to home</a>
+    <h1>
+      New Project
+    </h1>
+
+    <input type="text" id="title" [(ngModel)]="title" placeholder="Title" />
+    
+    <textarea id="description" [(ngModel)]="description" placeholder="Description" rows="4" ></textarea>
+
+    <button type="submit" (click)="submit()" >Create Project</button>
+
+  </div>  
+</section>

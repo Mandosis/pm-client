@@ -10,18 +10,19 @@ export class ProjectService {
 
   constructor(private http: Http, private authService: AuthService) { }
 
-  newProject(project: any) {
+  create(title: string, description: string) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    headers.append('x-access-token', this.authService.accessToken);
+    headers.append('x-access-token', this.authService.accessToken.toString());
 
     return this.http
-      .post('/v1/projects', JSON.stringify(project), { headers })
+      .post('/v1/projects', JSON.stringify({title, description}), { headers })
       .map(res => res.json())
       .map((res) => {
+        console.log(res);
 
         // TODO: redirect to new project
-        return res.success;
+        return res;
       })
   }
 
