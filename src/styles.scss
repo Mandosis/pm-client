@@ -11,3 +11,30 @@ html, body {
   background: #222;
   overflow: hidden;
 }
+
+.viewport {
+  .simplebar-track.vertical {
+    top: 0.3rem;
+    bottom: 0.3rem;
+    right: 0.3rem;
+    width: 0.5rem;
+    background: #EEE;
+    border-radius: 0.3rem;
+    position: absolute;
+    z-index: 1;
+
+    .simplebar-scrollbar {
+      position: absolute;
+      right: -0.25rem;
+      border-radius: 0.5rem;
+      min-height: 10px;
+      width: 0.5rem;
+      opacity: 1;
+      background: #CCC;
+      border: 0.3rem solid #FFF;
+      background-clip: padding-box;
+      margin-top: -0.3rem;
+    }
+  }
+}
+

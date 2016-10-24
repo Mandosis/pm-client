@@ -7,7 +7,9 @@
     {
       "root": "src",
       "outDir": "dist",
-      "assets": "assets",
+      "assets": [
+        "assets"
+      ],
       "index": "index.html",
       "main": "main.ts",
       "test": "test.ts",
@@ -17,10 +19,12 @@
       "styles": [
         "../node_modules/normalize.css/normalize.css",
         "../node_modules/font-awesome/css/font-awesome.min.css",
+        "../node_modules/simplebar/umd/simplebar.js",
         "styles.scss"
       ],
       "scripts": [
-        "../node_modules/socket.io-client/socket.io.js"
+        "../node_modules/socket.io-client/socket.io.js",
+        "../node_modules/simplebar/umd/simplebar.js"
       ],
       "environments": {
         "source": "environments/environment.ts",
