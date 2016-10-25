@@ -1,6 +1,6 @@
 <header *ngIf="authService.showNavBar">
   <span (click)="authService.logout()">Sign out</span>
 </header>
-<main [class.navbar-visible]="authService.showNavBar" data-simplebar>
+<main [class.navbar-visible]="authService.showNavBar" >
   <router-outlet></router-outlet>
 </main>

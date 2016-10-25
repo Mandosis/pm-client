@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location }          from '@angular/common';
 
 @Component({
@@ -11,20 +11,11 @@ export class ProjectComponent implements OnInit {
   activeLinePosition: string;
   activeLineColor: string;
   activeLineVisible: boolean = false;
-
-  @ViewChild('viewport') viewport; 
-
+  
   constructor(private location: Location) { }
 
   ngOnInit() {
   }
-
-  ngAfterViewInit() {
-    new SimpleBar(this.viewport.nativeElement, {
-      autoHide: false,
-    });
-  }
-  
 
   moveActiveLine(position: number) {
 

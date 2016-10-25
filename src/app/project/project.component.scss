@@ -4,7 +4,7 @@ $sidebar-width: 6rem;
 $nav-item-height: 6rem;
 $nav-icon-size: 2rem;
 
-.sidebar {
+.navbar {
   width: $sidebar-width;
   height: calc(100% - 4rem);
   background: $color-brand-primary;
@@ -63,5 +63,6 @@ $nav-icon-size: 2rem;
   height: calc(100% - 4rem);
   position: fixed;
   right: 0;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
