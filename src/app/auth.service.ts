@@ -52,7 +52,7 @@ export class AuthService {
   /**
    * Check if use is authenticated
    */
-  isAuthenticated(): boolean {
+  get isAuthenticated(): boolean {
 
     // TODO: Change to a simple test to see if JWT exists and not expired.
     let isExpired: boolean;

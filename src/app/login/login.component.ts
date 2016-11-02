@@ -1,6 +1,6 @@
-import { Component, OnInit, Renderer } from '@angular/core';
-import { Location }                    from '@angular/common';
-import { Router }                      from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Location }          from '@angular/common';
+import { Router }            from '@angular/router';
 
 import { AuthService } from '../auth.service';
 
@@ -12,13 +12,12 @@ import { AuthService } from '../auth.service';
 export class LoginComponent implements OnInit {
   email: string;
   password: string;
-  message: string;
+  message: string = '';
 
   constructor(
     private authService: AuthService,
     private location: Location,
     private router: Router,
-    private renderer: Renderer
   ) {}
 
   ngOnInit() {
@@ -27,10 +26,8 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.email && this.password) {
       this.authService.login(this.email, this.password)
-        .subscribe((result) => {
-          let isAuthenticated: boolean = this.authService.isAuthenticated();
-
-          if (isAuthenticated) {
+        .subscribe((success) => {
+          if (success) {
             let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/';
 
             this.router.navigate([redirect]);

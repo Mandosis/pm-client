@@ -1,4 +1,5 @@
 @import "../shared/colors";
+@import "../../../node_modules/open-color/open-color";
 
 
 section {
@@ -52,4 +53,15 @@ button {
   text-transform: uppercase;
   letter-spacing: 0.3rem;
   cursor: pointer;
+}
+
+.message {
+  background-color: $oc-red-8;
+  color: $oc-red-0;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  border-radius: 0.3rem;
 }

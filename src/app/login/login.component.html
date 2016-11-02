@@ -3,5 +3,7 @@
     <input type="email" id="email" name="email" [(ngModel)]="email" (keydown.enter)="login()" placeholder="Email">
     <input type="password" id="password" name="password" [(ngModel)]="password" (keydown.enter)="login()" placeholder="Password">
     <button type="submit" (click)="login()">Sign in</button>
+
+    <p class="message" *ngIf="message != '' || null">{{message}}</p>
   </div>
 </section>
