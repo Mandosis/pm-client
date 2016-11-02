@@ -12,14 +12,14 @@ import { AuthService } from '../auth.service';
 export class LoginComponent implements OnInit {
   email: string;
   password: string;
-  error: string;
+  message: string;
 
   constructor(
     private authService: AuthService,
     private location: Location,
     private router: Router,
     private renderer: Renderer
-  ) { }
+  ) {}
 
   ngOnInit() {
   }
@@ -28,23 +28,19 @@ export class LoginComponent implements OnInit {
     if (this.email && this.password) {
       this.authService.login(this.email, this.password)
         .subscribe((result) => {
-          // Check web socket authentication
-          this.authService.isAuthenticated()
-            .subscribe((result) => {
+          let isAuthenticated: boolean = this.authService.isAuthenticated();
 
-              // Redirect upon login
-              let redirectUrl = this.authService.redirectUrl;
+          if (isAuthenticated) {
+            let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/';
 
-              if (redirectUrl) {
-                this.location.back();
-              } else {
-                this.router.navigate(['']);
-              }
-            })
-        })
+            this.router.navigate([redirect]);
+          } else {
+            this.message = 'Username or password incorrect.';
+          }
+        });
     } else {
       // TODO: add better checking
-      console.log('user name or password missing');
+      this.message = 'Username or password missing.';
     }
   }
 

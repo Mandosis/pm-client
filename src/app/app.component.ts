@@ -9,17 +9,10 @@ import { AuthService } from './auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'app works!';
-  isAuthenticated: boolean;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    // Check if app shell should be visible
-    this.authService.isAuthenticated()
-      .subscribe((result: boolean) => {
-        this.isAuthenticated = result;
-      })
-
     // Refresh access token
     this.authService.refreshToken();
 

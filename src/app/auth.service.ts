@@ -52,7 +52,9 @@ export class AuthService {
   /**
    * Check if use is authenticated
    */
-  isAuthenticated() {
+  isAuthenticated(): boolean {
+
+    // TODO: Change to a simple test to see if JWT exists and not expired.
     let isExpired: boolean;
 
     if (this.accessToken) {
@@ -61,25 +63,13 @@ export class AuthService {
 
     if (isExpired) {
       this.logout();
-    }
+      this.showNavBar = false;
 
-    return new Observable(observer => {
-      if (this.accessToken && !isExpired) {
-        this.socket.on('connect', () => {
-          this.socket
-            .emit('authenticate', { token: this.accessToken })
-            .on('authenticated', () => {
-              this.showNavBar = true;
-              observer.next(true);
-              observer.complete();
-            })
-        });
-      } else {
-        this.showNavBar = false;
-        observer.next(false);
-        observer.complete();
-      }
-    })
+      return false;
+    } else {
+      this.showNavBar = true;
+      return true;
+    }
 
   }
 

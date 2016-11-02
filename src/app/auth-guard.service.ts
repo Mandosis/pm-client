@@ -14,23 +14,23 @@ export class AuthGuard implements CanActivate {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
-    this.authService.redirectUrl = state.url;
-    
-    return this.authService.isAuthenticated()
-      .map(result => {
-        let canActivate = result;
-        
-        if (!canActivate) {
-          this.router.navigate(['/signin']);
-        }
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
-        return canActivate;
-      })
-      .catch(() => {
-        this.router.navigate(['/signin']);
-        return Observable.of(false);
-      })
+    let url: string = state.url;
+
+    return this.checkLogin(url);
+
+  }
+
+  checkLogin(url: string): boolean {
+    if (this.authService.isAuthenticated) {
+      return true;
+    }
+
+    this.authService.redirectUrl = url;
+
+    this.router.navigate(['/signin']);
+    return false;
   }
 
 }

@@ -4,3 +4,21 @@
 <main [class.navbar-visible]="authService.showNavBar" >
   <router-outlet></router-outlet>
 </main>
+
+<section>
+  <div class="modal">
+    <div class="modal-header">
+      <h2>New Project</h2>
+    </div>
+
+    <div class="modal-body">
+      <input type="text" id="title" [(ngModel)]="title" placeholder="Title" />
+      <textarea id="description" [(ngModel)]="description" placeholder="Description" rows="4" ></textarea>
+      <button type="submit" (click)="submit()" >Create Project</button>
+    </div>
+
+    <div class="modal-footer">
+
+    </div>
+  </div>
+</section>
