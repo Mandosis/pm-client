@@ -1,4 +1,5 @@
 @import "./shared/colors";
+@import "../../node_modules/open-color/open-color";
 
 $navbar-height: 4rem;
 
@@ -22,6 +23,9 @@ main {
   overflow-x: hidden;
   overflow-y: auto;
   background: #FFF;
+  color: $oc-gray-8;
+  line-height: 1.6;
+
 }
 
 .navbar-visible {

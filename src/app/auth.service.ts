@@ -13,6 +13,7 @@ export class AuthService {
 
   showNavBar: boolean;
   redirectUrl: string;
+  currentUser: any;
 
   private jwtHelper: JwtHelper = new JwtHelper();
   private _socketUrl: string;
@@ -34,7 +35,9 @@ export class AuthService {
 
         if (token) {
           this.accessToken = token;
+          this.currentUser = this.jwtHelper.decodeToken(token);
         }
+
 
         return res.success;
       });
@@ -46,6 +49,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('accessToken');
     this.showNavBar = false;
+    this.currentUser = {};
     this.router.navigate(['signin']);
   }
 
@@ -64,12 +68,14 @@ export class AuthService {
     if (isExpired) {
       this.logout();
       this.showNavBar = false;
+      this.currentUser = {};
 
       return false;
-    } else {
-      this.showNavBar = true;
-      return true;
     }
+
+    this.currentUser = this.jwtHelper.decodeToken(this.accessToken);
+    this.showNavBar = true;
+    return true;
 
   }
 
@@ -96,6 +102,11 @@ export class AuthService {
    * Verify and refresh access token
    */
   refreshToken() {
+
+    if (!this.accessToken) {
+      return;
+    }
+    
     this.http.post('/v1/auth/refresh', { token: this.accessToken})
       .map(res => res.json())
       .map((res) => {

@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
     if (this.email && this.password) {
       this.authService.login(this.email, this.password)
         .subscribe((success) => {
+
           if (success) {
             let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/';
 
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit {
           } else {
             this.message = 'Username or password incorrect.';
           }
+          
         });
     } else {
       // TODO: add better checking

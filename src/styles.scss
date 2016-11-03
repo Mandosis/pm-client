@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'fonts';
+@import '../node_modules/open-color/open-color';
 
 html, body {
   font-family: 'Noto Sans', sans-serif;
@@ -8,7 +9,7 @@ html, body {
   margin: 0;
   padding: 0;
   position: absolute;
-  background: #222;
+  background: $oc-gray-9;
   overflow: hidden;
 }
 

@@ -1,4 +1,5 @@
 <header *ngIf="authService.showNavBar">
+  <span>Hello {{authService.currentUser.username}}!</span>
   <span (click)="authService.logout()">Sign out</span>
 </header>
 <main [class.navbar-visible]="authService.showNavBar" >
