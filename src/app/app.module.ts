@@ -10,8 +10,11 @@ import { HomeComponent } from './home/home.component';
 
 import { ProjectModule } from './project/project.module';
 
-import { AuthService } from './auth.service';
-import { AuthGuard } from './auth-guard.service';
+import {
+  AuthService,
+  AuthGuard,
+  UserService
+} from './shared';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { AuthGuard } from './auth-guard.service';
   ],
   providers: [
     AuthService,
-    AuthGuard
+    AuthGuard,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

@@ -12,7 +12,7 @@ import { ProjectSettingsComponent } from './project-settings/project-settings.co
 import { ProjectRoutingModule } from './project-routing.module';
 import { CreateProjectComponent } from './create-project/create-project.component';
 
-import { ProjectService } from './project.service';
+import { ProjectService } from '../shared';
 
 @NgModule({
   imports: [

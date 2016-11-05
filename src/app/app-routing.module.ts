@@ -8,7 +8,7 @@ import { HomeComponent }            from './home/home.component';
 import { ProjectRoutingModule }     from './project/project-routing.module';
 
 // Guards
-import { AuthGuard } from './auth-guard.service';
+import { AuthGuard } from './shared';
 
 const routes: Routes = [
   {

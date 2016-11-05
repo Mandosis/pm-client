@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Location }          from '@angular/common';
 
+import { Project } from '../shared';
+
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',

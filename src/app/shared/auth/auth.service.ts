@@ -7,6 +7,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import * as io from 'socket.io-client';
 
+import { UserService } from '../user/user.service';
+
 
 @Injectable()
 export class AuthService {
@@ -18,7 +20,11 @@ export class AuthService {
   private jwtHelper: JwtHelper = new JwtHelper();
   private _socketUrl: string;
 
-  constructor(private http: Http, private router: Router) { }
+  constructor(
+    private http: Http,
+    private router: Router,
+    // private userService: UserService
+  ) { }
 
   /**
    * Submit email and password to server to get auth token if valid
@@ -54,16 +60,18 @@ export class AuthService {
   }
 
   /**
-   * Check if use is authenticated
+   * Check if user is authenticated
    */
   get isAuthenticated(): boolean {
 
     // TODO: Change to a simple test to see if JWT exists and not expired.
-    let isExpired: boolean;
+    let isExpired: boolean = true;
 
     if (this.accessToken) {
-      isExpired = this.jwtHelper.isTokenExpired(this.accessToken);
+      isExpired = this.jwtHelper.isTokenExpired(this.accessToken); // Not setting token as expired for some reason.
     }
+
+    console.log('isExpired:', isExpired);
 
     if (isExpired) {
       this.logout();
@@ -72,6 +80,8 @@ export class AuthService {
 
       return false;
     }
+
+    console.log('why');
 
     this.currentUser = this.jwtHelper.decodeToken(this.accessToken);
     this.showNavBar = true;
@@ -123,5 +133,12 @@ export class AuthService {
         console.log('refreshToken called.');
       });
   }
+
+
+  /**
+   * Get and return current user information
+   */
+  // Set current user in userService or authService?
+
 
 }

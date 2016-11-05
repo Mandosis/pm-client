@@ -11,7 +11,7 @@ import { BoardsComponent }          from './boards/boards.component';
 import { CreateProjectComponent }   from './create-project/create-project.component';
 
 // Guards
-import { AuthGuard } from '../auth-guard.service';
+import { AuthGuard } from '../shared';
 
 const routes: Routes = [
   {

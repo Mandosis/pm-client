@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router }            from '@angular/router';
-import { ProjectService }    from '../project.service';
+import { ProjectService }    from '../../shared';
 
 @Component({
   selector: 'app-create-project',
