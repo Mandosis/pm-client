@@ -1,42 +1,38 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Router } from '@angular/router';
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelper} from 'angular2-jwt';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 
-import { AuthService } from '../auth/auth.service';
 import { User } from './user';
+
 
 @Injectable()
 export class UserService {
 
-  constructor(
-    private http: Http,
-    private authService: AuthService
-  ) { }
+  constructor(private http: Http) { }
 
-  // private _getHeaders() {
-  //   let headers = new Headers();
-  //   let accessToken = this.authService.accessToken;
+  private _getHeaders() {
+    let token = localStorage.getItem('accessToken');
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('x-access-token', token);
 
-  //   headers.append('Content-Type', 'application/json');
-  //   headers.append('x-access-token', accessToken);
+    return headers;
+  }
 
-  //   return headers;
-  // }
+  getById(id: string) {
+    let url = `/v1/users/id/${id}`;
+    let headers = this._getHeaders();
 
-  // getById(id: string) {
-  //   let url = `/v1/users/id/${id}`;
-  //   let headers = this._getHeaders();
-
-  //   return this.http
-  //     .get(url, { headers })
-  //     .map(res => res.json())
-  //     .map((res) => {
-  //       return new User(res.data);
-  //     });
-  // }
+    return this.http
+      .get(url, { headers })
+      .map(res => res.json())
+      .map((res) => {
+        return new User(res.data);
+      });
+  }
 
 }

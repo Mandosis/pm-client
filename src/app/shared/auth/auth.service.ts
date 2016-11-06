@@ -8,6 +8,7 @@ import 'rxjs/add/operator/take';
 import * as io from 'socket.io-client';
 
 import { UserService } from '../user/user.service';
+import { User } from '../user/user';
 
 
 @Injectable()
@@ -15,7 +16,7 @@ export class AuthService {
 
   showNavBar: boolean;
   redirectUrl: string;
-  currentUser: any;
+  private _currentUser: User;
 
   private jwtHelper: JwtHelper = new JwtHelper();
   private _socketUrl: string;
@@ -23,7 +24,7 @@ export class AuthService {
   constructor(
     private http: Http,
     private router: Router,
-    // private userService: UserService
+    private userService: UserService
   ) { }
 
   /**
@@ -41,7 +42,7 @@ export class AuthService {
 
         if (token) {
           this.accessToken = token;
-          this.currentUser = this.jwtHelper.decodeToken(token);
+          this._getCurrentUser();
         }
 
 
@@ -55,7 +56,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('accessToken');
     this.showNavBar = false;
-    this.currentUser = {};
+    this._currentUser = null;
     this.router.navigate(['signin']);
   }
 
@@ -76,14 +77,12 @@ export class AuthService {
     if (isExpired) {
       this.logout();
       this.showNavBar = false;
-      this.currentUser = {};
+      this._currentUser = null;
 
       return false;
     }
 
-    console.log('why');
-
-    this.currentUser = this.jwtHelper.decodeToken(this.accessToken);
+    this._getCurrentUser();
     this.showNavBar = true;
     return true;
 
@@ -123,6 +122,8 @@ export class AuthService {
         if (res.success) {
           this.accessToken = res.data;
         }
+
+        console.log(res);
         return res.success;
       })
       .subscribe((success) => {
@@ -139,6 +140,17 @@ export class AuthService {
    * Get and return current user information
    */
   // Set current user in userService or authService?
+  private _getCurrentUser() {
+    let id = this.jwtHelper.decodeToken(this.accessToken).id;
+    this.userService.getById(id)
+      .subscribe((user) => {
+        this._currentUser = user;
+      })
+  }
+
+  get currentUser() {
+    return this._currentUser;
+  }
 
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location }          from '@angular/common';
 
-import { Project } from '../shared';
+import { Project } from '../shared/project/project';
 
 @Component({
   selector: 'app-project',
