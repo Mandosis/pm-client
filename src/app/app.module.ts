@@ -14,6 +14,8 @@ import { ProjectModule } from './project/project.module';
 import { AuthService } from './shared/auth/auth.service';
 import { AuthGuard } from './shared/auth/auth-guard.service';
 import { UserService } from './shared/user/user.service';
+import { ProjectService } from './shared/project/project.service';
+import { ProjectGuard } from './shared/project/project-guard.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { UserService } from './shared/user/user.service';
   providers: [
     AuthService,
     AuthGuard,
-    UserService
+    UserService,
+    ProjectService
   ],
   bootstrap: [AppComponent]
 })

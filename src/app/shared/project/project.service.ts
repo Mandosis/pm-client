@@ -41,10 +41,9 @@ export class ProjectService {
   getByUrl(url: string) {
     this._setHeaders();
     let headers = this._headers;
-    let body = JSON.stringify({url});
 
     return this.http
-      .post('/v1/projects/url', body, { headers })
+      .get('/v1/projects/url/' + url, { headers })
       .map(res => res.json())
       .map((res) => {
         if (res.success) {
@@ -57,24 +56,43 @@ export class ProjectService {
   }
 
   isMember() {
-    // let memberKeys = this._project.members.keys;
-    // let memberValues = this._project.members.values;
+    let project = this._project;
 
-    // let memberTestValue = [
-    //   {
+    if (!project) {
+      return false;
+    }
 
-    //   }
-    // ]
-    // let memberMap = new Map(memberKeys)
+    for (let user of project.members) {
 
-    // for (let key of this._project.members) {
+      if (user.toString() === this._currentUserId) {
+        return true;
+      }
+      
+    }
 
-    // }
-
+    return false;
   }
 
   isAdmin() {
 
+  }
+
+  canActivate(params) {
+
+    return new Observable(observer => {
+      this.getByUrl(params.name)
+        .subscribe((result) => {
+          console.log('getByUrl Result:', result);
+          if (!result.success) {
+            observer.next(false);
+            observer.complete();
+            return;
+          }
+
+          observer.next(this.isMember());
+          observer.complete();
+        })
+    })
   }
 
   get currentProject() {
