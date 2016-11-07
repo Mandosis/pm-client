@@ -4,16 +4,23 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { AuthService } from '../auth/auth.service';
+import { IssueTrackerService } from '../issue-tracker/issue-tracker.service';
+import { IssueTracker } from '../issue-tracker/issue-tracker';
 import { Project } from './project';
 
 @Injectable()
 export class ProjectService {
 
   private _project: Project;
+  private _issueTracker: IssueTracker;
 
   private _headers = new Headers();
 
-  constructor(private http: Http, private authService: AuthService) { }
+  constructor(
+    private http: Http,
+    private authService: AuthService,
+    private issueTrackerService: IssueTrackerService
+  ) { }
 
   private _setHeaders() {
     let accessToken = this.authService.accessToken;
@@ -67,7 +74,7 @@ export class ProjectService {
       if (user.toString() === this._currentUserId) {
         return true;
       }
-      
+
     }
 
     return false;
@@ -89,6 +96,7 @@ export class ProjectService {
             return;
           }
 
+          this._getIssueTracker();
           observer.next(this.isMember());
           observer.complete();
         })
@@ -99,8 +107,25 @@ export class ProjectService {
     return this._project;
   }
 
+  get currentIssueTracker() {
+    return this._issueTracker;
+  }
+
   private get _currentUserId() {
     return this.authService.currentUser.id;
+  }
+
+  private _getIssueTracker() {
+    console.log('project:', this._project);
+    if (!this._project) {
+      return false;
+    }
+
+    this.issueTrackerService.getById(this._project.issue_tracker)
+      .subscribe((result) => {
+        this._issueTracker = result;
+        console.log(this._issueTracker);
+      })
   }
 
 

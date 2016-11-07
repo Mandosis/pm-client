@@ -152,5 +152,16 @@ export class AuthService {
     return this._currentUser;
   }
 
+  getHeaders(): Headers {
+    let headers = new Headers();
+    let accessToken = this.accessToken;
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('x-access-token', accessToken.toString());
+
+    return headers;
+  }
+
+
 
 }

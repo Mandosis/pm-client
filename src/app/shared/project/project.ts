@@ -10,8 +10,8 @@ export class Project {
   issue_tracker: string;
   created: Date;
 
-  constructor(project: Project) {
-    this.id = project.id;
+  constructor(project: any) {
+    this.id = project._id;
     this.url = project.url;
     this.title = project.title;
     this.description = project.description;

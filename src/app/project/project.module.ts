@@ -14,6 +14,8 @@ import { CreateProjectComponent } from './create-project/create-project.componen
 
 import { ProjectGuard } from '../shared/project/project-guard.service';
 import { ProjectHomeComponent } from './project-home/project-home.component';
+import { NewIssueComponent } from './issue-tracker/new-issue/new-issue.component';
+import { IssueListComponent } from './issue-tracker/issue-list/issue-list.component';
 
 @NgModule({
   imports: [
@@ -30,6 +32,8 @@ import { ProjectHomeComponent } from './project-home/project-home.component';
     ProjectSettingsComponent,
     CreateProjectComponent,
     ProjectHomeComponent,
+    NewIssueComponent,
+    IssueListComponent,
   ],
   providers: [
     ProjectGuard
