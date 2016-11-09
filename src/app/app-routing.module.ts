@@ -18,6 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'project',
+    pathMatch: 'full',
     loadChildren: 'project/project.module#ProjectModule'
   },
   {

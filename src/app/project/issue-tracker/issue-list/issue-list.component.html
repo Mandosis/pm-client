@@ -4,3 +4,10 @@
 
 <button routerLink="./new">New Issue</button>
 
+<section *ngIf="issueTracker.issues">
+  <ul *ngFor="let issue of issueTracker.issues; let i = index">
+    <li>
+      <a [routerLink]="['./', issue._id]">{{issue.title}}</a>
+    </li>
+  </ul>
+</section>

@@ -1,5 +1,5 @@
-import { Issue } from '../issue/issue';
-import { Tag }   from '../tag/tag';
+import { Issue } from './issue';
+import { Tag }   from './tag';
 
 export class IssueTracker {
   id: string;

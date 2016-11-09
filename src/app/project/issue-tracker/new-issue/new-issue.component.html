@@ -2,8 +2,9 @@
   <h1>New Issue</h1>
 
   <form>
-    <input type="text" placeholder="Title"/>
-    <textarea rows="10"></textarea>
-    <button type="submit">Create</button>
+    <input [(ngModel)]="title" type="text" name="title" placeholder="Title"/>
+    <textarea [(ngModel)]="body" name="content" rows="10"></textarea>
+    <button type="submit" (click)="createIssue()">Create</button>
   </form>
+  <p>{{error}}</p>
 </section>

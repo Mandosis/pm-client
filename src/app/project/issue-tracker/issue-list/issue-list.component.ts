@@ -10,16 +10,14 @@ import { IssueTracker }   from '../../../shared/issue-tracker/issue-tracker';
 })
 export class IssueListComponent implements OnInit {
 
-  private _issueTracker: IssueTracker;
+  issueTracker: IssueTracker;
 
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
-    this._issueTracker = this.projectService.currentIssueTracker;
+    this.issueTracker = this.projectService.currentIssueTracker;
+    console.log('This projects issuetracker:', this.issueTracker);
   }
-
-  get issues() {
-    return this._issueTracker.issues;
-  }
+  
 
 }

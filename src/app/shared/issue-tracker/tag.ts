@@ -1,4 +1,4 @@
-import { Issue } from '../issue-tracker/issue';
+import { Issue } from './issue';
 
 export class Tag {
   id: string;

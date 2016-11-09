@@ -11,6 +11,7 @@ import { BoardsComponent }          from './boards/boards.component';
 import { CreateProjectComponent }   from './create-project/create-project.component';
 import { NewIssueComponent }        from './issue-tracker/new-issue/new-issue.component';
 import { IssueListComponent }       from './issue-tracker/issue-list/issue-list.component';
+import { IssueComponent }       from './issue-tracker/issue/issue.component';
 
 // Guards
 import { AuthGuard } from '../shared/auth/auth-guard.service';
@@ -45,6 +46,10 @@ const routes: Routes = [
           {
             path: 'new',
             component: NewIssueComponent
+          },
+          {
+            path: ':id',
+            component: IssueComponent
           }
         ]
       },
