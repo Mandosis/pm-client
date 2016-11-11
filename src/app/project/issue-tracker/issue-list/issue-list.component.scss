@@ -1,0 +1,28 @@
+section {
+  box-sizing: border-box;
+  padding: 0 3rem;
+}
+
+.issues {
+  .head {
+    min-width: 3rem;
+    background: #EEE;
+  }
+  ul {
+    border: 1px solid #EEE;
+    list-style: none;
+
+    li {
+
+      h2 {
+        margin: 0;
+      }
+
+      a {
+        display: block;
+      }
+
+      background: #FFF;
+    }
+  }
+}

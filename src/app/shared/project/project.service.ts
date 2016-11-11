@@ -32,7 +32,7 @@ export class ProjectService {
   create(title: string, description: string) {
     this._setHeaders();
     let headers = this._headers;
-    let body = JSON.stringify({ title, description })
+    let body = JSON.stringify({ title: title, description: description });
 
     return this.http
       .post('/v1/projects', body, { headers })

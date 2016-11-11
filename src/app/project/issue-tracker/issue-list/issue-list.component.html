@@ -4,10 +4,14 @@
 
 <button routerLink="./new">New Issue</button>
 
-<section *ngIf="issueTracker.issues">
+<section class="issues" *ngIf="issueTracker.issues !== undefined">
+  <div class="head">
+    <h1>{{issueTracker.issues.length}}</h1>
+  </div>
   <ul *ngFor="let issue of issueTracker.issues; let i = index">
     <li>
-      <a [routerLink]="['./', issue._id]">{{issue.title}}</a>
+      <a [routerLink]="['./', issue._id]"><h2>{{issue.title}}</h2></a>
+      <span>#{{i}} opened {{issue.created}} by {{issue.author}}</span>
     </li>
   </ul>
 </section>
