@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
+import { ActivatedRoute } from '@angular/router';
+
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -18,6 +20,7 @@ export class ProjectService {
 
   constructor(
     private http: Http,
+    private activatedRoute: ActivatedRoute,
     private authService: AuthService,
     private issueTrackerService: IssueTrackerService
   ) { }
@@ -84,23 +87,16 @@ export class ProjectService {
 
   }
 
-  canActivate(params) {
+  isAuthenticated(url: string) {
+    let headers = this.authService.getHeaders();
+    let body = JSON.stringify({ url });
 
-    return new Observable(observer => {
-      this.getByUrl(params.name)
-        .subscribe((result) => {
-          console.log('getByUrl Result:', result);
-          if (!result.success) {
-            observer.next(false);
-            observer.complete();
-            return;
-          }
-
-          this._getIssueTracker();
-          observer.next(this.isMember());
-          observer.complete();
-        })
-    })
+    return this.http
+      .post('/v1/auth/project', body, { headers })
+      .map(res => res.json())
+      .map((res) => {
+        return res.success;
+      });
   }
 
   get currentProject() {
@@ -125,7 +121,11 @@ export class ProjectService {
       .subscribe((result) => {
         this._issueTracker = result;
         console.log(this._issueTracker);
-      })
+      });
+  }
+
+  get url() {
+    return this.activatedRoute.snapshot.params['url'];
   }
 
 

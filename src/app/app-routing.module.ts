@@ -2,10 +2,10 @@ import { NgModule }             from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // Components
-import { ProjectComponent }         from './project/project.component';
 import { LoginComponent }           from './login/login.component';
 import { HomeComponent }            from './home/home.component';
 import { ProjectRoutingModule }     from './project/project-routing.module';
+import { NotFoundComponent }        from './not-found/not-found.component';
 
 // Guards
 import { AuthGuard } from './shared';
@@ -26,8 +26,12 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: '404',
+    component: NotFoundComponent
+  },
+  {
     path: '**',
-    redirectTo: ''
+    component: NotFoundComponent
   }
 ];
 

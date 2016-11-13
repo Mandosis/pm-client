@@ -15,7 +15,11 @@ export class ProjectHomeComponent implements OnInit {
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
-    this.project = this.projectService.currentProject;
+    let url = this.projectService.url;
+    this.projectService.getByUrl(url)
+      .subscribe((project) => {
+        this.project = new Project(project);
+      });
   }
 
 }

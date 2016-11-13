@@ -5,35 +5,34 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 }                         from '@angular/router';
-import { Observable }     from 'rxjs/Observable'
-import { AuthService }    from '../auth/auth.service';
+import { Observable }     from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/of';
+
 import { ProjectService } from './project.service';
 
+
 @Injectable()
-export class ProjectGuard {
+export class ProjectGuard implements CanActivate {
 
   constructor(
-    private AuthService: AuthService,
     private projectService: ProjectService,
     private router: Router
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    // Implement Guard
-
-    console.log('Route:', route, '\nState:', state);
-
-    return this.projectService.canActivate(route.params)
+    let url = route.params['url'];
+    return this.projectService.isAuthenticated(url)
       .map(result => {
-        let canActivate = result;
-
-        if (!canActivate) {
-          this.router.navigate(['/']);
+        if (!result) {
+          this.router.navigate(['404'], { skipLocationChange: true });
         }
-
-        return canActivate;
+        return result;
       })
-
-  }
-
+      .catch(() => {
+        this.router.navigate(['404'], { skipLocationChange: true });
+        return Observable.of(false);
+      });
+    }
 }

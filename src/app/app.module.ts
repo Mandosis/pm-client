@@ -16,12 +16,14 @@ import { AuthGuard } from './shared/auth/auth-guard.service';
 import { UserService } from './shared/user/user.service';
 import { ProjectService } from './shared/project/project.service';
 import { IssueTrackerService } from './shared/issue-tracker/issue-tracker.service';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
