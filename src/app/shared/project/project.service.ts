@@ -12,7 +12,7 @@ import { Project } from './project';
 
 @Injectable()
 export class ProjectService {
-
+  currentUrl: string;
   private _project: Project;
   private _issueTracker: IssueTracker;
 
@@ -123,10 +123,5 @@ export class ProjectService {
         console.log(this._issueTracker);
       });
   }
-
-  get url() {
-    return this.activatedRoute.snapshot.params['url'];
-  }
-
 
 }

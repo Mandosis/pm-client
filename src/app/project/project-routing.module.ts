@@ -19,7 +19,7 @@ import { ProjectGuard } from '../shared/project/project-guard.service';
 
 const routes: Routes = [
   {
-    path: 'project/:name',
+    path: 'project/:url',
     component: ProjectComponent,
     canActivate: [AuthGuard, ProjectGuard],
     children: [

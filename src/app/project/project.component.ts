@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location }          from '@angular/common';
 
-import { Project } from '../shared/project/project';
-
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -14,7 +12,9 @@ export class ProjectComponent implements OnInit {
   activeLineColor: string;
   activeLineVisible: boolean = false;
   
-  constructor(private location: Location) { }
+  constructor(
+    private location: Location,
+  ) { }
 
   ngOnInit() {
   }

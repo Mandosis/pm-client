@@ -22,12 +22,16 @@ export class ProjectGuard implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    let url = route.params['url'];
+    let url = route.root.children[0].params['url'];
+    console.log('ProjectGuard Url:', url);
+
     return this.projectService.isAuthenticated(url)
       .map(result => {
         if (!result) {
           this.router.navigate(['404'], { skipLocationChange: true });
         }
+
+        this.projectService.currentUrl = url;
         return result;
       })
       .catch(() => {
