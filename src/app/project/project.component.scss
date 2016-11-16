@@ -19,6 +19,13 @@ $nav-icon-size: 2rem;
     margin: 1rem;
     background: $color-project-icon-default;
     cursor: pointer;
+    text-align: center;
+    color: #a3b7ce;
+
+    .material-icons {
+      font-size: 2.4rem;
+      margin-top: 0.8rem;
+    }
   }
 
   nav {
@@ -50,8 +57,9 @@ $nav-icon-size: 2rem;
         cursor: pointer;
 
         // Font Awesome
-        .fa {
-          margin-top: $nav-icon-size;
+        .material-icons {
+          margin-top: 1.8rem;
+          font-size: 2.4rem;
         }
       }
     }
