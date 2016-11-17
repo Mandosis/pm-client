@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 // Components
 import { LoginComponent }           from './login/login.component';
 import { HomeComponent }            from './home/home.component';
-import { ProjectRoutingModule }     from './project/project-routing.module';
 import { NotFoundComponent }        from './not-found/not-found.component';
 
 // Guards
@@ -27,10 +26,12 @@ const routes: Routes = [
   },
   {
     path: '404',
+    canActivate: [AuthGuard],
     component: NotFoundComponent
   },
   {
     path: '**',
+    canActivate: [AuthGuard],
     component: NotFoundComponent
   }
 ];
